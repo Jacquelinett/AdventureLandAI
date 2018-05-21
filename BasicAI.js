@@ -51,10 +51,22 @@ function setCurrentCharacter() {
 	}
 }
 
+function loadTeam() {
+	if (CURRENT_CHAR == 0) { // Is Captain
+		var characters = get_active_characters()
+		for (var i = 1; i < chars.length; i++) {
+			if(!characters[chars[i].name]) {
+				start_character(chars[i].name, 2);
+			}
+		}
+	}
+}
+
 function char_init() {
 	setCurrentCharacter();
 	
 	if (CURRENT_CHAR == 0) { // Is Captain
+		loadTeam();
 		inviteTeam(); // Invite team
 	} else if (parent.party_list.length == 0) {
 		joinCaptain();
@@ -246,5 +258,18 @@ setInterval(function(){
 			break;
 		}
 	}
+	else {
 
-}, 100); // Loops every 1/4 seconds.
+	}
+
+}, 100);
+
+setInterval(function(){
+	if (!ready && CURRENT_CHAR != 0) {
+		return;
+	}
+
+	if (parent.party_list.length < MAX_PARTY) {
+		inviteTeam();
+	}
+}, 10000); 
