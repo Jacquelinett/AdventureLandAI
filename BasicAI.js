@@ -207,7 +207,7 @@ function heal_team() {
 		var member = get_player(parent.party_list[i]);
 		if (member != null && !member.rip && member.hp < member.max_hp) {
 			var difference = member.max_hp - member.hp;
-			if (difference > 80 && difference < lowest) {
+			if (difference > 400 && difference < lowest) {
 				lowest = difference;
 				if (target == null || target.max_hp - target.hp > difference) {
 					target = member;
@@ -234,7 +234,7 @@ setInterval(function(){
 	if (character.hp < 50 || character.mp < 50) {
 		use_hp_or_mp();
 	}
-	
+
 	loot();
 
 	if (parent.party_list.length != 0) {
